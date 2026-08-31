@@ -11,7 +11,7 @@ mô phỏng bằng máy trạng thái ở client (`src/lib/useAssistant.ts`).
 ## Công nghệ
 
 React 18 · TypeScript (strict) · Vite 5 · CSS Modules trên bộ design token
-(`src/styles/tokens/`) · triển khai bằng Cloudflare Workers static assets (Wrangler 4).
+(`src/styles/tokens/`) · deploy tĩnh lên Cloudflare Pages bằng Wrangler 4.
 
 Không dùng CSS framework: token màu/typography/spacing/effects lấy từ 1Matrix Design
 System, bổ sung lớp `--ktnn-*` cho dải navy của KTNN.
@@ -51,26 +51,25 @@ src/
   types/         Kiểu dùng chung
 ```
 
-## Triển khai Cloudflare (Wrangler)
+## Triển khai Cloudflare Pages (Wrangler)
 
-Cấu hình: [`wrangler.jsonc`](wrangler.jsonc) — Worker **static-only** (không có `main`),
-`assets.directory = ./dist`, `not_found_handling = single-page-application`.
+Repo chỉ có FE nên deploy là **upload thư mục `dist/` tĩnh** lên Cloudflare Pages —
+không có worker, không có code chạy phía server.
 
 ```bash
-npx wrangler login              # lần đầu
-npm run deploy:check            # build + wrangler deploy --dry-run (không đẩy lên)
-npm run deploy                  # build + deploy môi trường production
-npm run deploy:staging          # deploy sang worker vanbandieuhanh-demo-staging
-npm run cf:dev                  # chạy bản build qua runtime Workers ở local
+npx wrangler login       # lần đầu
+npm run build            # sinh dist/
+npm run deploy           # wrangler pages deploy dist --project-name vanbandieuhanh-demo
+npm run deploy:preview   # deploy nhánh preview (URL riêng, không đụng production)
 ```
 
-URL sau khi deploy: `https://vanbandieuhanh-demo.<subdomain>.workers.dev`.
+URL sau khi deploy: `https://vanbandieuhanh-demo.pages.dev`.
 
-Lần đầu chạy `wrangler dev` cần cho phép script cài đặt của `workerd`
-(`npm install-scripts approve workerd`) do npm 11 mặc định chặn.
+[`public/_redirects`](public/_redirects) trả `index.html` cho mọi đường dẫn (mã 200) để
+điều hướng phía client không bị 404 — hiện demo dùng hash router nên chưa cần, nhưng
+giữ sẵn cho lúc chuyển sang đường dẫn thường.
 
-Quản lý phiên bản: `npx wrangler versions list`, quay lại bản trước bằng
-`npx wrangler rollback`.
+Xem lịch sử deploy: `npx wrangler pages deployment list --project-name vanbandieuhanh-demo`.
 
 ## Lưu ý nội dung
 
