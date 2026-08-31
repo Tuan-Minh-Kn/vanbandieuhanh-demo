@@ -1,0 +1,33 @@
+.wrap {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.text {
+  font-size: 13.5px;
+  line-height: var(--lh-prose);
+  text-wrap: pretty;
+  color: var(--text-primary);
+}
+
+.lg {
+  font-size: 14.5px;
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: -2px;
+  background: var(--c-blue);
+  animation: caret 1s steps(1) infinite;
+}

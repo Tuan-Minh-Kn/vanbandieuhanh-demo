@@ -1,0 +1,31 @@
+.card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+.accent {
+  width: 3px;
+  height: 16px;
+  border-radius: 2px;
+  flex: none;
+}
+
+.title {
+  font-size: 13.5px;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-snug);
+}
+
+.spacer {
+  flex: 1;
+}

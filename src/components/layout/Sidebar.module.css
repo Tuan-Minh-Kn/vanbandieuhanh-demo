@@ -1,0 +1,183 @@
+.sidebar {
+  width: var(--sidebar-width);
+  flex: none;
+  background: var(--surface-card);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  padding: 12px 10px;
+  gap: 2px;
+}
+
+.group {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--grad-ktnn-panel);
+}
+
+.groupHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 12px;
+  color: var(--text-inverse);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  transition: background var(--dur-fast) ease;
+}
+
+.groupHeader:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.groupLabel {
+  flex: 1;
+  text-align: left;
+  font-size: 12.5px;
+  font-weight: var(--fw-tight);
+}
+
+.chevron {
+  flex: none;
+  transition: transform 180ms var(--ease-out);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  background: var(--surface-card);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 11px;
+  border-radius: var(--radius-md);
+  font-size: 12.5px;
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  transition: all var(--dur-fast) ease;
+}
+
+.navItem:hover {
+  background: var(--n-50);
+}
+
+.navItemActive,
+.navItemActive:hover {
+  background: var(--c-info-bg);
+  color: var(--c-blue-deep);
+  font-weight: var(--fw-tight);
+}
+
+.navIcon {
+  flex: none;
+  opacity: 0.85;
+}
+
+.navLabel {
+  flex: 1;
+  text-align: left;
+}
+
+.navBadge {
+  padding: 1px 7px;
+  border-radius: var(--radius-pill);
+  background: var(--n-100);
+  color: var(--text-secondary);
+  font-size: 10.5px;
+  font-weight: var(--fw-bold);
+}
+
+.navBadgeActive {
+  background: var(--c-blue);
+  color: var(--text-inverse);
+}
+
+.footItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 12.5px;
+  font-weight: var(--fw-book-alt);
+  color: var(--text-inverse);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  transition: background var(--dur-fast) ease;
+}
+
+.footItem:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.footIcon {
+  flex: none;
+  opacity: 0.9;
+}
+
+.footLabel {
+  flex: 1;
+  text-align: left;
+}
+
+.footBadge {
+  min-width: 18px;
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.22);
+  color: var(--text-inverse);
+  font-size: 10.5px;
+  font-weight: var(--fw-bold);
+  text-align: center;
+}
+
+.footPanel {
+  background: var(--surface-card);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.footRow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--n-100);
+  transition: background var(--dur-fast) ease;
+}
+
+.footRow:hover {
+  background: var(--n-50);
+}
+
+.footRowIcon {
+  flex: none;
+  color: var(--c-blue-deep);
+}
+
+.footRowText {
+  min-width: 0;
+  flex: 1;
+}
+
+.footRowLabel {
+  font-size: 12px;
+  font-weight: var(--fw-book-alt);
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+
+.footRowMeta {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}

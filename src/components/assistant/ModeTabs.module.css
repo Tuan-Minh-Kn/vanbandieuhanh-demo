@@ -1,0 +1,72 @@
+/* --- Biến thể "panel": hai chip ngang trong hộp thoại trợ lý --- */
+.panel {
+  display: flex;
+  gap: 6px;
+  flex: none;
+}
+
+.panelTab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex: 1;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--n-50);
+  color: var(--n-500);
+  font-size: 12.5px;
+  font-weight: var(--fw-semibold);
+  transition: all var(--dur-base) var(--ease-out);
+}
+
+.panelTabActive {
+  background: var(--c-info-bg);
+  border-color: var(--border-info);
+  color: var(--c-blue-deep);
+}
+
+/* --- Biến thể "hero": tab lớn kèm mô tả, dùng ở trang Trợ lý --- */
+.hero {
+  display: flex;
+  gap: 6px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--surface-sunken);
+}
+
+.heroTab {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 14px;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--n-500);
+  transition: all var(--dur-base) var(--ease-out);
+}
+
+.heroTabActive {
+  background: var(--n-0);
+  color: var(--c-ink);
+  box-shadow: var(--shadow-tab);
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.25;
+}
+
+.heroTitle {
+  font-size: 13.5px;
+  font-weight: var(--fw-semibold);
+}
+
+.heroHint {
+  font-size: 11px;
+  font-weight: var(--fw-book);
+  opacity: 0.72;
+}

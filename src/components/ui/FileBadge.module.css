@@ -1,0 +1,36 @@
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  border-radius: 8px;
+  font-weight: var(--fw-bold);
+}
+
+.md {
+  width: 30px;
+  height: 30px;
+  font-size: 8.5px;
+}
+
+.sm {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  font-size: 8px;
+}
+
+.pdf {
+  background: var(--c-danger-bg);
+  color: var(--c-danger-ink);
+}
+
+.xlsx {
+  background: var(--c-success-bg);
+  color: var(--c-success-ink);
+}
+
+.docx {
+  background: var(--c-info-bg);
+  color: var(--c-blue-deep);
+}

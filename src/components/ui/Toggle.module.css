@@ -1,0 +1,52 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+.track {
+  position: relative;
+  display: inline-block;
+  width: 28px;
+  height: 16px;
+  flex: none;
+  border-radius: var(--radius-pill);
+  background: var(--n-300);
+  transition: background var(--dur-base) ease;
+}
+
+.on {
+  background: var(--c-teal);
+}
+
+.knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--n-0);
+  box-shadow: 0 1px 2px rgba(1, 1, 53, 0.25);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.on .knob {
+  transform: translateX(12px);
+}
+
+.lg {
+  width: 30px;
+  height: 17px;
+}
+
+.lg .knob {
+  width: 13px;
+  height: 13px;
+}
+
+.lg.on .knob {
+  transform: translateX(13px);
+}

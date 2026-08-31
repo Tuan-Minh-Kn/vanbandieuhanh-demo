@@ -1,0 +1,15 @@
+.viewAll {
+  font-size: 12px;
+  color: var(--text-link);
+  font-weight: var(--fw-book-alt);
+}
+
+.viewAll:hover {
+  text-decoration: underline;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

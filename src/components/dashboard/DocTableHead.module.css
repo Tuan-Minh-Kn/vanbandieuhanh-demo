@@ -1,0 +1,25 @@
+.head {
+  display: grid;
+  padding: 8px 14px;
+  background: var(--n-50);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 10.5px;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-wide);
+  color: var(--text-muted);
+}
+
+.incoming {
+  grid-template-columns:
+    minmax(70px, 92px) minmax(94px, 128px) minmax(170px, 1fr)
+    minmax(90px, 118px) minmax(136px, 176px);
+}
+
+.outgoing {
+  grid-template-columns: minmax(94px, 128px) minmax(170px, 1fr) minmax(110px, 150px) minmax(150px, 200px);
+}
+
+.right {
+  text-align: right;
+}

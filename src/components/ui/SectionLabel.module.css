@@ -1,0 +1,11 @@
+.label {
+  font-size: 10.5px;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.tight {
+  letter-spacing: 0.09em;
+}

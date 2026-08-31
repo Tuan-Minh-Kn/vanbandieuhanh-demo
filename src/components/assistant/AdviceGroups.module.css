@@ -1,0 +1,108 @@
+.list {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lg {
+  gap: 12px;
+}
+
+.group {
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.lg .group {
+  border-radius: 13px;
+}
+
+.groupHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 11px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.lg .groupHead {
+  gap: 9px;
+  padding: 10px 12px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.lg .dot {
+  width: 8px;
+  height: 8px;
+}
+
+.groupTitle {
+  font-size: 12px;
+  font-weight: var(--fw-tight);
+}
+
+.lg .groupTitle {
+  font-size: 12.5px;
+}
+
+.groupCount {
+  font-size: 10.5px;
+  color: var(--text-muted);
+}
+
+.lg .groupCount {
+  font-size: 11px;
+}
+
+.item {
+  display: flex;
+  gap: 9px;
+  padding: 9px 11px;
+  border-top: 1px solid var(--n-100);
+}
+
+.lg .item {
+  gap: 10px;
+  padding: 10px 12px;
+}
+
+.no {
+  font-size: 10.5px;
+  font-weight: var(--fw-bold);
+  color: var(--n-400);
+  padding-top: 2px;
+}
+
+.lg .no {
+  font-size: 11px;
+}
+
+.text {
+  font-size: 12.5px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.lg .text {
+  font-size: 13px;
+}
+
+.refs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.lg .refs {
+  gap: 6px;
+  margin-top: 6px;
+}

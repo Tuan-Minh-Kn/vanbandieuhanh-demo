@@ -1,0 +1,74 @@
+.wrap {
+  flex: none;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: var(--fw-tight);
+}
+
+.required {
+  font-size: 10.5px;
+  color: var(--c-danger);
+}
+
+.field {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 84px;
+  padding: 10px 11px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 11px;
+  background: var(--n-50);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  resize: vertical;
+}
+
+.field:focus {
+  outline: none;
+  border-color: var(--c-blue);
+  background: var(--n-0);
+  box-shadow: var(--ring);
+}
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 7px;
+}
+
+.lg .label {
+  font-size: 12.5px;
+  font-weight: var(--fw-semibold);
+}
+
+.lg .required {
+  font-size: 11px;
+}
+
+.lg .head {
+  gap: 8px;
+  margin-bottom: 7px;
+}
+
+.lg .field {
+  min-height: 92px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+.lg .presets {
+  gap: 6px;
+  margin-top: 8px;
+}

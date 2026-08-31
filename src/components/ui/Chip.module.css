@@ -1,0 +1,36 @@
+.preset {
+  padding: 4px 9px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  background: var(--n-50);
+  font-size: 11px;
+  color: var(--text-secondary);
+  transition: all var(--dur-fast) ease;
+}
+
+.preset:hover {
+  border-color: var(--c-blue);
+  color: var(--c-blue-deep);
+  background: var(--surface-tint-blue);
+}
+
+.lg {
+  padding: 5px 10px;
+  font-size: 11.5px;
+}
+
+.ref {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  background: var(--c-info-bg);
+  color: var(--c-blue-deep);
+  font-size: 10px;
+  font-weight: var(--fw-tight);
+}
+
+.refLg {
+  padding: 3px 8px;
+  font-size: 10.5px;
+  font-weight: var(--fw-semibold);
+}

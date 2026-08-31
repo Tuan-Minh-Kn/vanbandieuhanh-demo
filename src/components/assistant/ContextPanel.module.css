@@ -1,0 +1,92 @@
+.panel {
+  flex: none;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 11px;
+  background: var(--n-50);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.addLink {
+  font-size: 11px;
+  color: var(--text-link);
+  font-weight: var(--fw-book-alt);
+}
+
+.addLink:hover {
+  text-decoration: underline;
+}
+
+.doc {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--n-100);
+}
+
+.docText {
+  min-width: 0;
+  flex: 1;
+}
+
+.code {
+  font-size: 12.5px;
+  font-weight: var(--fw-tight);
+  color: var(--c-blue-deep);
+}
+
+.title {
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 3px;
+  text-wrap: pretty;
+}
+
+.meta {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.file {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--n-100);
+}
+
+.file:last-child {
+  border-bottom: none;
+}
+
+.fileText {
+  min-width: 0;
+  flex: 1;
+}
+
+.fileName {
+  font-size: 12px;
+  font-weight: var(--fw-semibold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileMeta {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}

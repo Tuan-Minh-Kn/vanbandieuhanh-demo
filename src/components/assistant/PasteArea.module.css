@@ -1,0 +1,26 @@
+.field {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 128px;
+  padding: 11px 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--n-50);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  resize: vertical;
+}
+
+.field:focus {
+  outline: none;
+  border-color: var(--c-blue);
+  background: var(--n-0);
+  box-shadow: var(--ring);
+}
+
+.count {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 5px;
+}

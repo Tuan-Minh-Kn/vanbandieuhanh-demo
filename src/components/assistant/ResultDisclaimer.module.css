@@ -1,0 +1,25 @@
+.wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.icon {
+  flex: none;
+  margin-top: 1px;
+}
+
+.text {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.lg {
+  align-items: center;
+  gap: 8px;
+}
+
+.lg .text {
+  font-size: 11.5px;
+}

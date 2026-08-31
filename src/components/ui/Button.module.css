@@ -1,0 +1,71 @@
+.base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: var(--radius-md);
+  font-size: 12.5px;
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+  transition: all var(--dur-base) var(--ease-out);
+}
+
+.md {
+  padding: 8px 13px;
+}
+
+.sm {
+  padding: 5px 9px;
+  border-radius: 8px;
+  font-size: 11px;
+}
+
+.lg {
+  padding: 10px 20px;
+  border-radius: 11px;
+  font-size: 13.5px;
+}
+
+.block {
+  width: 100%;
+  padding: 9px;
+  font-size: 12.5px;
+}
+
+.primary {
+  background: var(--grad-ktnn-action);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-ktnn-action);
+}
+
+.primary:hover {
+  filter: brightness(1.06);
+}
+
+.secondary {
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-card);
+  color: var(--text-secondary);
+}
+
+.secondary:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-default);
+}
+
+.brand {
+  border: 1px solid var(--border-teal);
+  background: var(--grad-brand-soft);
+  color: var(--c-blue-deep);
+}
+
+.brand:hover {
+  border-color: var(--c-teal);
+}
+
+.muted {
+  background: var(--n-200);
+  color: var(--n-500);
+  cursor: default;
+  box-shadow: none;
+}

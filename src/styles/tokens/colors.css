@@ -1,0 +1,85 @@
+/* Color tokens — nguồn: 1Matrix Design System (brand guide "Quy định Logo - Màu - Font chữ")
+   Lớp phủ KTNN (--ktnn-*) là dải navy dùng cho header / thanh điều hướng của
+   Hệ thống Quản lý Văn bản và Điều hành. */
+
+:root {
+  /* ---- Brand core ------------------------------------------- */
+  --c-green:      #6DE881;
+  --c-mint:       #41F1B8;
+  --c-teal:       #2FC4B2;
+  --c-blue:       #22B3DD;
+  --c-blue-deep:  #1A6FB5;
+  --c-indigo:     #040460;
+  --c-ink:        #010135;
+
+  /* ---- Brand gradients -------------------------------------- */
+  --grad-brand:      linear-gradient(135deg, var(--c-green) 0%, var(--c-teal) 50%, var(--c-blue) 100%);
+  --grad-brand-soft: linear-gradient(135deg, #E9FCF3 0%, #E4F6FB 100%);
+
+  /* ---- Neutral ramp ----------------------------------------- */
+  --n-0:   #FFFFFF;
+  --n-50:  #F5F8FB;
+  --n-100: #EDF2F7;
+  --n-200: #DDE5EE;
+  --n-300: #C4D0DE;
+  --n-400: #97A6BC;
+  --n-500: #6B7B93;
+  --n-600: #4C5B73;
+  --n-700: #303C54;
+  --n-800: #1A2238;
+  --n-900: #0C1124;
+  --n-950: #010135;
+
+  /* ---- Semantic / status ------------------------------------ */
+  --c-success:     #16B364;
+  --c-success-bg:  #E7F8EF;
+  --c-success-ink: #0E7C48;
+  --c-warning:     #F0A715;
+  --c-warning-bg:  #FDF3DE;
+  --c-warning-ink: #9A6206;
+  --c-danger:      #E5484D;
+  --c-danger-bg:   #FCE9EA;
+  --c-danger-ink:  #A6231E;
+  --c-info:        var(--c-blue);
+  --c-info-bg:     #E4F6FB;
+  --c-teal-ink:    #0E7C6B;
+
+  /* ---- KTNN chrome (header, sidebar, primary action) -------- */
+  --ktnn-navy:        #010135;
+  --ktnn-navy-mid:    #0B2F63;
+  --ktnn-blue:        #14508F;
+  --ktnn-blue-light:  #1E76B8;
+  --grad-ktnn-header: linear-gradient(100deg, #010135 0%, #0B2F63 42%, #14508F 78%, #1E76B8 100%);
+  --grad-ktnn-brand:  linear-gradient(100deg, #0A2550 0%, #14508F 58%, #1E76B8 100%);
+  --grad-ktnn-panel:  linear-gradient(160deg, #1E76B8, #14508F);
+  --grad-ktnn-action: linear-gradient(135deg, #14508F, #1E76B8);
+  --shadow-ktnn-action: 0 2px 8px rgba(20, 80, 143, 0.28);
+
+  /* ---- Text ------------------------------------------------- */
+  --text-primary:   var(--c-ink);
+  --text-secondary: var(--n-600);
+  --text-muted:     var(--n-500);
+  --text-disabled:  var(--n-400);
+  --text-inverse:   var(--n-0);
+  --text-link:      var(--c-blue-deep);
+
+  /* ---- Surfaces --------------------------------------------- */
+  --surface-page:      var(--n-50);
+  --surface-card:      var(--n-0);
+  --surface-sunken:    var(--n-100);
+  --surface-hover:     var(--n-50);
+  --surface-selected:  #F4FAFE;
+  --surface-tint-blue: #F2FAFD;
+
+  /* ---- Borders ---------------------------------------------- */
+  --border-subtle:  var(--n-200);
+  --border-default: var(--n-300);
+  --border-strong:  var(--n-400);
+  --border-focus:   var(--c-blue);
+  --border-brand-soft: #CDEBF3;
+  --border-info:    #BFDDF2;
+  --border-teal:    #BFE7E1;
+
+  /* ---- Focus ring ------------------------------------------- */
+  --ring: 0 0 0 3px rgba(34, 179, 221, 0.35);
+}

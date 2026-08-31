@@ -1,0 +1,26 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.cell {
+  padding: 10px 11px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 11px;
+  background: var(--n-50);
+}
+
+.label {
+  font-size: 10.5px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.value {
+  font-size: 15px;
+  font-weight: var(--fw-tight);
+  margin-top: 3px;
+  letter-spacing: var(--ls-snug);
+}
