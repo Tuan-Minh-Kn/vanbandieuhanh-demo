@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { INBOX_FILTERS } from '../../data/dashboard';
-import type { IncomingDoc } from '../../types';
+import type { Attachment, IncomingDoc } from '../../types';
 import { Badge } from '../ui/Badge';
 import { Card } from '../ui/Card';
 import { SegmentedControl } from '../ui/SegmentedControl';
@@ -13,13 +13,23 @@ const COLUMNS = ['NGÀY ĐẾN', 'SỐ KÝ HIỆU', 'TRÍCH YẾU · CƠ QUAN', 
 export interface IncomingDocsCardProps {
   docs: IncomingDoc[];
   onSummarize: (index: number) => void;
+  /** Tóm tắt đúng một tệp đính kèm của văn bản thứ `index`. */
+  onSummarizeFile: (index: number, file: Attachment) => void;
+  onPreviewFile: (file: Attachment) => void;
   onAdvise: (index: number) => void;
 }
 
 /** Bảng "Văn bản đến chưa xử lý" — lọc nhanh, mở tệp đính kèm, gọi trợ lý. */
-export function IncomingDocsCard({ docs, onSummarize, onAdvise }: IncomingDocsCardProps) {
+export function IncomingDocsCard({
+  docs,
+  onSummarize,
+  onSummarizeFile,
+  onPreviewFile,
+  onAdvise,
+}: IncomingDocsCardProps) {
   const [filter, setFilter] = useState(0);
-  const [expanded, setExpanded] = useState(0);
+  /** -1 = chưa mở hàng nào; lần đầu vào danh sách gập hết. */
+  const [expanded, setExpanded] = useState(-1);
 
   return (
     <Card
@@ -43,6 +53,8 @@ export function IncomingDocsCard({ docs, onSummarize, onAdvise }: IncomingDocsCa
           expanded={expanded === index}
           onToggle={() => setExpanded((current) => (current === index ? -1 : index))}
           onSummarize={() => onSummarize(index)}
+          onSummarizeFile={(file) => onSummarizeFile(index, file)}
+          onPreviewFile={onPreviewFile}
           onAdvise={() => onAdvise(index)}
         />
       ))}

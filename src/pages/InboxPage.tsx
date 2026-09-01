@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AssistantModal } from '../components/assistant/AssistantModal';
+import { DocumentPreviewModal } from '../components/preview/DocumentPreviewModal';
 import { EmptyQueues } from '../components/dashboard/EmptyQueues';
 import { IncomingDocsCard } from '../components/dashboard/IncomingDocsCard';
 import { KpiRow } from '../components/dashboard/KpiRow';
@@ -8,30 +9,55 @@ import { PersonalStats } from '../components/dashboard/PersonalStats';
 import { AppFooter } from '../components/layout/AppFooter';
 import { AppHeader } from '../components/layout/AppHeader';
 import { Sidebar } from '../components/layout/Sidebar';
-import { Button } from '../components/ui/Button';
-import { PlusIcon, SparkleIcon } from '../components/ui/Icon';
 import { INCOMING_DOCS, OUTGOING_DOCS } from '../data/documents';
 import { useAssistant } from '../lib/useAssistant';
-import type { AssistantMode } from '../types';
+import type { Attachment, AssistantMode } from '../types';
 import styles from './InboxPage.module.css';
 
-export interface InboxPageProps {
-  /** Chuyển sang trang Trợ lý đầy đủ. */
-  onOpenAssistantPage: () => void;
-}
-
 /** Trang "Hộp việc của tôi" — hộp việc văn bản đến/đi kèm trợ lý AI. */
-export function InboxPage({ onOpenAssistantPage }: InboxPageProps) {
+export function InboxPage() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [assistantOpen, setAssistantOpen] = useState(false);
+  /** Tên tệp sẽ đưa vào lần chạy hiện tại — mỗi lần chỉ xử lý một tệp. */
+  const [selectedFile, setSelectedFile] = useState<string | null>(null);
+  /** Tệp đang xem trước; null là không mở. */
+  const [previewFile, setPreviewFile] = useState<Attachment | null>(null);
   const activeDoc = INCOMING_DOCS[activeIndex];
   const assistant = useAssistant({ summaryText: activeDoc.summary });
 
-  /** Mở trợ lý cho một văn bản và chạy luôn chế độ được chọn. */
-  const focusDoc = (index: number, mode: AssistantMode) => {
+  /**
+   * Mở trợ lý cho một văn bản, chọn sẵn tệp đầu tiên và dừng ở bước chọn tệp —
+   * người dùng đổi tệp nếu cần rồi tự bấm chạy.
+   */
+  const openAssistant = (index: number, mode: AssistantMode) => {
     setActiveIndex(index);
+    setSelectedFile(INCOMING_DOCS[index].attachments[0]?.name ?? null);
     setAssistantOpen(true);
-    assistant.start(mode);
+    assistant.setMode(mode);
+  };
+
+  /** Đã chỉ rõ tệp thì bỏ qua bước chọn, chạy tóm tắt ngay. */
+  const summarizeFile = (index: number, file: Attachment) => {
+    setActiveIndex(index);
+    setSelectedFile(file.name);
+    setAssistantOpen(true);
+    assistant.start('summary');
+  };
+
+  /**
+   * Đổi tệp thì bỏ kết quả cũ: giữ lại sẽ thành bản tóm tắt của lần chạy trước
+   * nhưng ghi nguồn là tệp vừa chọn.
+   */
+  /** Xem trước theo tên tệp — dùng từ hộp thoại trợ lý, nơi chỉ có tên. */
+  const previewByName = (name: string) => {
+    const file = activeDoc.attachments.find((item) => item.name === name);
+    if (file) setPreviewFile(file);
+  };
+
+  const selectFile = (name: string) => {
+    if (name === selectedFile) return;
+    assistant.reset();
+    setSelectedFile(name);
   };
 
   return (
@@ -43,19 +69,8 @@ export function InboxPage({ onOpenAssistantPage }: InboxPageProps) {
 
         <main className={styles.main}>
           <div className={styles.toolbar}>
-            <div>
-              <h1 className={styles.pageTitle}>Hộp việc của tôi</h1>
-              <div className={styles.pageMeta}>5 văn bản chờ xử lý · 1 sắp đến hạn · cập nhật 20:08</div>
-            </div>
-            <span className={styles.spacer} />
-            <Button variant="brand" onClick={() => focusDoc(0, 'summary')}>
-              <SparkleIcon size={14} />
-              Tóm tắt cả hộp việc
-            </Button>
-            <Button variant="primary">
-              <PlusIcon size={14} strokeWidth={2.2} />
-              Soạn văn bản
-            </Button>
+            <h1 className={styles.pageTitle}>Hộp việc của tôi</h1>
+            <div className={styles.pageMeta}>3 văn bản chờ xử lý · 1 sắp đến hạn · cập nhật 20:08</div>
           </div>
 
           <div className={styles.scroll}>
@@ -63,10 +78,12 @@ export function InboxPage({ onOpenAssistantPage }: InboxPageProps) {
               <KpiRow />
               <IncomingDocsCard
                 docs={INCOMING_DOCS}
-                onSummarize={(index) => focusDoc(index, 'summary')}
-                onAdvise={(index) => focusDoc(index, 'advice')}
+                onSummarize={(index) => openAssistant(index, 'summary')}
+                onSummarizeFile={summarizeFile}
+                onPreviewFile={setPreviewFile}
+                onAdvise={(index) => openAssistant(index, 'advice')}
               />
-              <OutgoingDocsCard docs={OUTGOING_DOCS} onCompare={() => focusDoc(0, 'summary')} />
+              <OutgoingDocsCard docs={OUTGOING_DOCS} onCompare={() => openAssistant(0, 'summary')} />
               <EmptyQueues />
               <PersonalStats />
             </div>
@@ -79,9 +96,13 @@ export function InboxPage({ onOpenAssistantPage }: InboxPageProps) {
         open={assistantOpen}
         doc={activeDoc}
         assistant={assistant}
+        selectedFile={selectedFile}
+        onSelectFile={selectFile}
+        onPreviewFile={previewByName}
         onClose={() => setAssistantOpen(false)}
-        onOpenFullPage={onOpenAssistantPage}
       />
+
+      <DocumentPreviewModal file={previewFile} onClose={() => setPreviewFile(null)} />
     </div>
   );
 }

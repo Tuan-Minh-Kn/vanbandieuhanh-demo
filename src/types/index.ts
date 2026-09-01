@@ -8,6 +8,8 @@ export interface Attachment {
   ext: AttachmentExt;
   name: string;
   meta: string;
+  /** Đường dẫn tệp thật để xem trước; bỏ trống nếu chỉ là dữ liệu mẫu. */
+  url?: string;
 }
 
 export interface Citation {
@@ -33,6 +35,11 @@ export interface IncomingDoc {
   level: UrgencyLevel;
   /** Nhãn số tệp hiển thị trên chip đính kèm, ví dụ "2 tệp". */
   files: string;
+  /**
+   * Cờ nội bộ cho phía phát triển: văn bản đã có bản tóm tắt dựng sẵn. KHÔNG
+   * hiển thị cho người dùng — người dùng không cần biết bản tóm tắt có sẵn hay
+   * được sinh lúc bấm.
+   */
   hasSummary: boolean;
   attachments: Attachment[];
   /** Bút phê / ý kiến chỉ đạo đã ghi trên văn bản. */

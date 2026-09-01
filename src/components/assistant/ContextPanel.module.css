@@ -72,6 +72,11 @@
   border-bottom: none;
 }
 
+/* Tệp được chọn: nền xanh rất nhạt để thấy ngay cái gì sẽ đưa vào model. */
+.fileSelected {
+  background: var(--surface-tint-blue);
+}
+
 .fileText {
   min-width: 0;
   flex: 1;

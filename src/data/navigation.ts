@@ -5,7 +5,7 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: 'Văn bản đến',
     icon: 'M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM14 3v5h5',
-    badge: '4',
+    badge: '3',
   },
   {
     label: 'Văn bản đi',

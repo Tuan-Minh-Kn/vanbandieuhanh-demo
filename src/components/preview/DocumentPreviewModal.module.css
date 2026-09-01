@@ -1,0 +1,139 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(1, 1, 53, 0.55);
+  backdrop-filter: blur(2px);
+  animation: fadeIn 180ms ease;
+}
+
+.panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 61;
+  transform: translate(-50%, -50%);
+  width: min(1080px, calc(100vw - 40px));
+  height: min(88vh, 1000px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  box-shadow: var(--shadow-modal);
+  animation: rise 220ms var(--ease-out);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--n-50);
+  flex: none;
+}
+
+.text {
+  min-width: 0;
+  flex: 1;
+}
+
+.name {
+  font-size: 13px;
+  font-weight: var(--fw-tight);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: none;
+}
+
+/* Nút dạng liên kết: tải xuống và mở tab mới trỏ thẳng vào tệp thật. */
+.linkButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 11px;
+  border-radius: 9px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-card);
+  font-size: 12px;
+  font-weight: var(--fw-semibold);
+  color: var(--text-secondary);
+  transition: all var(--dur-fast) ease;
+}
+
+.linkButton:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-default);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--surface-sunken);
+  color: var(--text-secondary);
+  flex: none;
+  transition: all var(--dur-fast) ease;
+}
+
+.close:hover {
+  background: var(--n-200);
+  color: var(--text-primary);
+}
+
+.viewer {
+  flex: 1;
+  min-height: 0;
+  border: none;
+  width: 100%;
+  background: var(--n-100);
+}
+
+.fallback {
+  padding: 9px 14px;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--n-50);
+  font-size: 11px;
+  color: var(--text-muted);
+  flex: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -47%) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

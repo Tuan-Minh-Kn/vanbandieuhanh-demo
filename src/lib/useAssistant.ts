@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { formatSeconds } from './format';
 import type { AssistantMode, RunStatus } from '../types';
 
-/** Ba bước xử lý hiển thị trong lúc chạy. */
-export const RUN_STEP_COUNT = 3;
+/** Khoảng thời gian khối "AI đang suy nghĩ" chạy — mỗi lần chạy lấy ngẫu nhiên trong khoảng này. */
+export const THINKING_MIN_MS = 3000;
+export const THINKING_MAX_MS = 5000;
 
-const STEP_FIRST_DELAY = 500;
-const STEP_DELAY = 600;
-const TYPE_DELAY = 460;
+function thinkingDuration(): number {
+  return THINKING_MIN_MS + Math.random() * (THINKING_MAX_MS - THINKING_MIN_MS);
+}
+
 const TYPE_TICK = 16;
 const TYPE_CHUNK = 5;
 const COPY_RESET = 1400;
@@ -22,9 +25,9 @@ export interface UseAssistantOptions {
 export interface AssistantController {
   mode: AssistantMode;
   status: RunStatus;
-  /** Số bước đã hoàn thành (0…3). */
-  step: number;
   stream: string;
+  /** Thời gian chạy thực đo được của lần gần nhất, ví dụ "7,8 giây"; null nếu chưa chạy. */
+  elapsedLabel: string | null;
   copied: boolean;
   /** Bật/tắt "Kèm điều khoản trích dẫn". */
   cite: boolean;
@@ -44,8 +47,9 @@ export interface AssistantController {
 }
 
 /**
- * Máy trạng thái của trợ lý: idle → running (3 bước) → streaming (gõ dần) → done.
- * Ở chế độ "Tham mưu" bỏ qua bước gõ chữ và chuyển thẳng sang done.
+ * Máy trạng thái của trợ lý: idle → running ("AI đang suy nghĩ", 3–5 giây ngẫu
+ * nhiên) → streaming (gõ dần) → done. Ở chế độ "Tham mưu" bỏ qua bước gõ chữ và chuyển
+ * thẳng sang done.
  */
 export function useAssistant({
   summaryText,
@@ -54,8 +58,8 @@ export function useAssistant({
 }: UseAssistantOptions): AssistantController {
   const [mode, setModeState] = useState<AssistantMode>(initialMode);
   const [status, setStatus] = useState<RunStatus>(initialStatus);
-  const [step, setStep] = useState(initialStatus === 'done' ? RUN_STEP_COUNT : 0);
   const [stream, setStream] = useState(initialStatus === 'done' ? summaryText : '');
+  const [elapsedLabel, setElapsedLabel] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [cite, setCite] = useState(true);
   const [lengthIndex, setLengthIndex] = useState(1);
@@ -63,6 +67,8 @@ export function useAssistant({
   const timeoutRef = useRef<number | null>(null);
   const intervalRef = useRef<number | null>(null);
   const copyTimeoutRef = useRef<number | null>(null);
+  /** Mốc bắt đầu lần chạy hiện tại, để đo thời gian thực. */
+  const startedAtRef = useRef(0);
   /** Giữ giá trị mới nhất để các callback không bắt phải bản cũ. */
   const summaryRef = useRef(summaryText);
   const modeRef = useRef(mode);
@@ -84,9 +90,14 @@ export function useAssistant({
     };
   }, [clearTimers]);
 
+  const finish = useCallback(() => {
+    setElapsedLabel(formatSeconds((Date.now() - startedAtRef.current) / 1000));
+    setStatus('done');
+  }, []);
+
   const type = useCallback(() => {
     if (modeRef.current === 'advice') {
-      setStatus('done');
+      finish();
       return;
     }
     const text = summaryRef.current;
@@ -98,37 +109,28 @@ export function useAssistant({
       if (cursor >= text.length) {
         clearTimers();
         setStream(text);
-        setStatus('done');
+        finish();
       } else {
         setStream(text.slice(0, cursor));
       }
     }, TYPE_TICK);
-  }, [clearTimers]);
+  }, [clearTimers, finish]);
 
   const run = useCallback(() => {
     clearTimers();
     setStatus('running');
-    setStep(0);
     setStream('');
+    setElapsedLabel(null);
     setCopied(false);
-
-    let current = 0;
-    const advance = () => {
-      current += 1;
-      setStep(current);
-      timeoutRef.current = window.setTimeout(
-        current < RUN_STEP_COUNT ? advance : type,
-        current < RUN_STEP_COUNT ? STEP_DELAY : TYPE_DELAY,
-      );
-    };
-    timeoutRef.current = window.setTimeout(advance, STEP_FIRST_DELAY);
+    startedAtRef.current = Date.now();
+    timeoutRef.current = window.setTimeout(type, thinkingDuration());
   }, [clearTimers, type]);
 
   const reset = useCallback(() => {
     clearTimers();
     setStatus('idle');
-    setStep(0);
     setStream('');
+    setElapsedLabel(null);
     setCopied(false);
   }, [clearTimers]);
 
@@ -138,8 +140,8 @@ export function useAssistant({
       modeRef.current = next;
       setModeState(next);
       setStatus('idle');
-      setStep(0);
       setStream('');
+      setElapsedLabel(null);
     },
     [clearTimers],
   );
@@ -150,7 +152,6 @@ export function useAssistant({
       modeRef.current = next;
       setModeState(next);
       setStatus('idle');
-      setStep(0);
       setStream('');
       timeoutRef.current = window.setTimeout(run, delay);
     },
@@ -168,8 +169,8 @@ export function useAssistant({
   return {
     mode,
     status,
-    step,
     stream,
+    elapsedLabel,
     copied,
     cite,
     lengthIndex,

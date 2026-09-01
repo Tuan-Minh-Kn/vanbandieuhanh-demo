@@ -33,7 +33,10 @@ npm run preview    # xem bản build
 | `#/tro-ly-van-ban` | Trợ lý văn bản pháp luật — nạp tài liệu rời, tóm tắt / tham mưu |
 
 Từ hộp việc: bấm **Tóm tắt** hoặc icon **Tham mưu** trên một hàng văn bản để mở hộp
-thoại trợ lý; trong hộp thoại có liên kết **Mở toàn trang** sang trang trợ lý.
+thoại trợ lý — hộp thoại dừng ở bước **chọn tệp** (chọn sẵn tệp đầu tiên) để người dùng
+đổi tệp nếu cần rồi tự bấm chạy. Mỗi lần chạy chỉ xử lý **một tệp**. Riêng nút **Tóm tắt
+tệp** trong danh sách đính kèm đã chỉ rõ tệp nên bỏ qua bước chọn, chạy ngay. Trang trợ lý độc lập truy cập bằng đường dẫn `#/tro-ly-van-ban` (chưa có
+liên kết trong giao diện).
 
 ## Cấu trúc
 
@@ -44,9 +47,10 @@ src/
     layout/      BrandBar, AppHeader, Sidebar, AppFooter
     dashboard/   KPI, bảng văn bản đến/đi, tệp đính kèm, hàng đợi rỗng, thống kê
     assistant/   Hộp thoại trợ lý, tab chế độ, ngữ cảnh, ô chỉ đạo, kết quả (tóm tắt/tham mưu)
+    preview/     Hộp thoại xem trước tệp PDF thật
   pages/         InboxPage, AssistantPage
   data/          Dữ liệu mẫu: văn bản, tham mưu, điều hướng, KPI, phiên trợ lý
-  lib/           useAssistant (máy trạng thái), useHashRoute, runSteps
+  lib/           useAssistant (máy trạng thái), useHashRoute
   styles/        tokens/ + base.css
   types/         Kiểu dùng chung
 ```
@@ -70,6 +74,21 @@ URL sau khi deploy: `https://vanbandieuhanh-demo.pages.dev`.
 giữ sẵn cho lúc chuyển sang đường dẫn thường.
 
 Xem lịch sử deploy: `npx wrangler pages deployment list --project-name vanbandieuhanh-demo`.
+
+## Văn bản thật & xem trước
+
+Ba văn bản trong hộp việc dùng **số ký hiệu, cơ quan ban hành, ngày ban hành thật**, đọc
+từ chính tệp PDF: Nghị định `283/2026/NĐ-CP`, Tờ trình `8662/TTr-SNV`, Thông tư
+`03/2026/TT-NHNN`.
+
+- Tệp gốc (tên có dấu) để ở `data_sources/` — thư mục này **không đưa vào git**.
+- Bản phục vụ web đặt ở `public/data_sources/` với tên không dấu, đúng tên ghi trong
+  `src/data/documents.ts` (trường `url` của mỗi tệp đính kèm).
+- Bấm **Xem** trong danh sách đính kèm, hoặc icon xem trước trong hộp thoại trợ lý, để
+  mở tệp bằng trình đọc PDF của trình duyệt; kèm nút mở tab mới và tải xuống.
+
+Thêm văn bản mới: bỏ PDF vào `public/data_sources/` rồi khai báo thêm một mục trong
+`INCOMING_DOCS`.
 
 ## Lưu ý nội dung
 

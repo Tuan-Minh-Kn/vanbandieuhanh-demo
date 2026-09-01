@@ -1,7 +1,7 @@
 import { KPIS } from '../../data/dashboard';
 import styles from './KpiRow.module.css';
 
-/** Bốn chỉ số đầu hộp việc: tồn, sắp đến hạn, chờ phát hành, đã có tóm tắt AI. */
+/** Chỉ số đầu hộp việc: văn bản tồn, sắp đến hạn, văn bản đi chờ phát hành. */
 export function KpiRow() {
   return (
     <div className={styles.grid}>

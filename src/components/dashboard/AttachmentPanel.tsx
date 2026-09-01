@@ -11,10 +11,12 @@ export interface AttachmentPanelProps {
   attachments: Attachment[];
   /** Tóm tắt riêng một tệp đính kèm. */
   onSummarizeFile?: (attachment: Attachment) => void;
+  /** Xem trước tệp thật. */
+  onPreviewFile?: (attachment: Attachment) => void;
 }
 
 /** Khối tệp đính kèm mở ra dưới một hàng văn bản đến. */
-export function AttachmentPanel({ attachments, onSummarizeFile }: AttachmentPanelProps) {
+export function AttachmentPanel({ attachments, onSummarizeFile, onPreviewFile }: AttachmentPanelProps) {
   return (
     <div className={styles.wrap}>
       <div className={styles.panel}>
@@ -41,10 +43,12 @@ export function AttachmentPanel({ attachments, onSummarizeFile }: AttachmentPane
               <SparkleIcon size={11} strokeWidth={2.3} />
               Tóm tắt tệp
             </Button>
-            <Button size="sm" variant="secondary">
-              <ExternalLinkIcon size={12} />
-              Xem
-            </Button>
+            {file.url && (
+              <Button size="sm" variant="secondary" onClick={() => onPreviewFile?.(file)}>
+                <ExternalLinkIcon size={12} />
+                Xem
+              </Button>
+            )}
             <IconButton variant="solid" label={`Tải xuống ${file.name}`}>
               <DownloadIcon size={13} strokeWidth={2.1} />
             </IconButton>

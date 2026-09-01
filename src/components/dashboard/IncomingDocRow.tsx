@@ -1,5 +1,4 @@
-import type { IncomingDoc, UrgencyLevel } from '../../types';
-import { Badge } from '../ui/Badge';
+import type { Attachment, IncomingDoc, UrgencyLevel } from '../../types';
 import { Button } from '../ui/Button';
 import { AdviceIcon, ChevronDownIcon, PaperclipIcon, SparkleIcon } from '../ui/Icon';
 import { IconButton } from '../ui/IconButton';
@@ -17,11 +16,22 @@ export interface IncomingDocRowProps {
   expanded: boolean;
   onToggle: () => void;
   onSummarize: () => void;
+  /** Tóm tắt đúng một tệp — bỏ qua bước chọn tệp. */
+  onSummarizeFile: (file: Attachment) => void;
+  onPreviewFile: (file: Attachment) => void;
   onAdvise: () => void;
 }
 
 /** Một hàng văn bản đến: mở/gập danh sách tệp, gọi trợ lý tóm tắt hoặc tham mưu. */
-export function IncomingDocRow({ doc, expanded, onToggle, onSummarize, onAdvise }: IncomingDocRowProps) {
+export function IncomingDocRow({
+  doc,
+  expanded,
+  onToggle,
+  onSummarize,
+  onSummarizeFile,
+  onPreviewFile,
+  onAdvise,
+}: IncomingDocRowProps) {
   return (
     <div className={[styles.wrap, expanded ? styles.wrapExpanded : ''].join(' ')}>
       <div
@@ -48,12 +58,6 @@ export function IncomingDocRow({ doc, expanded, onToggle, onSummarize, onAdvise 
           <div className={styles.title}>{doc.title}</div>
           <div className={styles.metaRow}>
             <span className={styles.org}>{doc.org}</span>
-            {doc.hasSummary && (
-              <Badge tone="brand">
-                <SparkleIcon size={10} strokeWidth={2.4} />
-                Đã có tóm tắt AI
-              </Badge>
-            )}
             <span
               className={[styles.attachChip, expanded ? styles.attachChipActive : ''].join(' ')}
               onClick={(event) => {
@@ -105,7 +109,13 @@ export function IncomingDocRow({ doc, expanded, onToggle, onSummarize, onAdvise 
         </div>
       </div>
 
-      {expanded && <AttachmentPanel attachments={doc.attachments} onSummarizeFile={onSummarize} />}
+      {expanded && (
+        <AttachmentPanel
+          attachments={doc.attachments}
+          onSummarizeFile={onSummarizeFile}
+          onPreviewFile={onPreviewFile}
+        />
+      )}
     </div>
   );
 }

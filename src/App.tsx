@@ -10,5 +10,5 @@ export default function App() {
     return <AssistantPage onBack={() => navigate('inbox')} />;
   }
 
-  return <InboxPage onOpenAssistantPage={() => navigate('assistant')} />;
+  return <InboxPage />;
 }

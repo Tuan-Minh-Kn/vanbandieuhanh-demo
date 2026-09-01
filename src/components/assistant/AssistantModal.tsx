@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { DIRECTIVE_PRESETS, DISCLAIMER_INBOX, MODEL_NOTE } from '../../data/assistant';
 import { getAdviceGroups } from '../../data/advice';
 import type { AssistantController } from '../../lib/useAssistant';
-import { buildRunSteps } from '../../lib/runSteps';
 import type { IncomingDoc } from '../../types';
 import { Button } from '../ui/Button';
 import { CloseIcon, CopyIcon, DownloadIcon, SparkleIcon } from '../ui/Icon';
@@ -12,7 +11,7 @@ import { DirectiveInput } from './DirectiveInput';
 import { EmptyResult } from './EmptyResult';
 import { ModeTabs } from './ModeTabs';
 import { ResultDisclaimer } from './ResultDisclaimer';
-import { RunSteps } from './RunSteps';
+import { ThinkingIndicator } from './ThinkingIndicator';
 import { SummaryStream } from './SummaryStream';
 import styles from './AssistantModal.module.css';
 
@@ -23,19 +22,34 @@ const EMPTY_HINT = {
 
 const ELAPSED = { summary: '7,8 giây', advice: '11,4 giây' };
 
+const THINKING_NOTE = {
+  summary: 'Đang đọc văn bản trong ngữ cảnh và đối chiếu điều khoản liên quan.',
+  advice: 'Đang đối chiếu chỉ đạo của lãnh đạo với nội dung văn bản.',
+};
+
 export interface AssistantModalProps {
   open: boolean;
   doc: IncomingDoc;
   assistant: AssistantController;
+  /** Tên tệp được chọn cho lần chạy này. */
+  selectedFile: string | null;
+  onSelectFile: (name: string) => void;
+  onPreviewFile: (name: string) => void;
   onClose: () => void;
-  /** Mở trang Trợ lý đầy đủ (tải file, dán văn bản, lịch sử phiên). */
-  onOpenFullPage: () => void;
 }
 
 /** Hộp thoại trợ lý gọi từ một hàng văn bản trong hộp việc. */
-export function AssistantModal({ open, doc, assistant, onClose, onOpenFullPage }: AssistantModalProps) {
+export function AssistantModal({
+  open,
+  doc,
+  assistant,
+  selectedFile,
+  onSelectFile,
+  onPreviewFile,
+  onClose,
+}: AssistantModalProps) {
   const [directive, setDirective] = useState('');
-  const { mode, isIdle, isRunning, isStreaming, isDone, step, stream } = assistant;
+  const { mode, isIdle, isRunning, isStreaming, isDone, stream } = assistant;
   const advice = mode === 'advice';
 
   useEffect(() => {
@@ -48,6 +62,17 @@ export function AssistantModal({ open, doc, assistant, onClose, onOpenFullPage }
   }, [open, onClose]);
 
   const busy = isRunning || isStreaming;
+  const nothingSelected = selectedFile === null;
+
+  const runLabel = busy
+    ? 'Đang xử lý…'
+    : nothingSelected
+      ? 'Chọn tệp cần xử lý'
+      : advice
+        ? 'Đề xuất việc cần làm'
+        : doc.attachments.length > 1
+          ? 'Tóm tắt tệp đã chọn'
+          : 'Tóm tắt văn bản này';
 
   return (
     <>
@@ -74,9 +99,6 @@ export function AssistantModal({ open, doc, assistant, onClose, onOpenFullPage }
             </div>
           </div>
           <span className={styles.spacer} />
-          <button type="button" className={styles.fullPage} onClick={onOpenFullPage}>
-            Mở toàn trang
-          </button>
           <button type="button" className={styles.close} onClick={onClose} aria-label="Đóng trợ lý">
             <CloseIcon size={14} />
           </button>
@@ -87,7 +109,12 @@ export function AssistantModal({ open, doc, assistant, onClose, onOpenFullPage }
         </div>
 
         <div className={styles.body}>
-          <ContextPanel doc={doc} />
+          <ContextPanel
+            doc={doc}
+            selectedFile={selectedFile}
+            onSelectFile={onSelectFile}
+            onPreviewFile={onPreviewFile}
+          />
 
           {advice && (
             <DirectiveInput
@@ -100,14 +127,14 @@ export function AssistantModal({ open, doc, assistant, onClose, onOpenFullPage }
 
           <Button
             size="block"
-            variant={busy ? 'muted' : 'primary'}
-            disabled={busy}
+            variant={busy || nothingSelected ? 'muted' : 'primary'}
+            disabled={busy || nothingSelected}
             onClick={assistant.run}
           >
-            {busy ? 'Đang xử lý…' : advice ? 'Đề xuất việc cần làm' : 'Tóm tắt văn bản này'}
+            {runLabel}
           </Button>
 
-          {isRunning && <RunSteps steps={buildRunSteps(mode)} step={step} />}
+          {isRunning && <ThinkingIndicator note={THINKING_NOTE[mode]} />}
 
           {isIdle && <EmptyResult hint={EMPTY_HINT[mode]} />}
 
@@ -115,7 +142,8 @@ export function AssistantModal({ open, doc, assistant, onClose, onOpenFullPage }
             <SummaryStream
               text={stream}
               streaming={isStreaming}
-              elapsed={isDone ? ELAPSED.summary : undefined}
+              elapsed={isDone ? (assistant.elapsedLabel ?? ELAPSED.summary) : undefined}
+              source={selectedFile}
             />
           )}
 

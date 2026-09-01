@@ -5,7 +5,6 @@ import {
   STANDALONE_METRICS,
 } from '../../data/standaloneSession';
 import type { AssistantController } from '../../lib/useAssistant';
-import { buildRunSteps } from '../../lib/runSteps';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { CopyIcon, DownloadIcon } from '../ui/Icon';
@@ -14,7 +13,7 @@ import { CitationList } from './CitationList';
 import { EmptyResult } from './EmptyResult';
 import { MetricsGrid } from './MetricsGrid';
 import { ResultDisclaimer } from './ResultDisclaimer';
-import { RunSteps } from './RunSteps';
+import { ThinkingIndicator } from './ThinkingIndicator';
 import { SummaryStream } from './SummaryStream';
 import styles from './ResultCard.module.css';
 
@@ -25,16 +24,21 @@ const EMPTY_HINT = {
 
 const ELAPSED = { summary: '7,8 giây', advice: '11,4 giây' };
 
+const THINKING_NOTE = {
+  summary: 'Đang đọc tài liệu bạn cung cấp và trích các điều khoản liên quan.',
+  advice: 'Đang đối chiếu chỉ đạo của lãnh đạo với nội dung tài liệu.',
+};
+
 /** Cột phải trang Trợ lý: trạng thái xử lý và kết quả đầy đủ. */
 export function ResultCard({ assistant }: { assistant: AssistantController }) {
-  const { mode, isIdle, isRunning, isStreaming, isDone, step, stream, cite } = assistant;
+  const { mode, isIdle, isRunning, isStreaming, isDone, stream, cite, elapsedLabel } = assistant;
   const advice = mode === 'advice';
 
   return (
     <section className={styles.card}>
       <header className={styles.header}>
         <h2 className={styles.title}>Kết quả</h2>
-        {isDone && <Badge tone="success">Hoàn tất · {ELAPSED[mode]}</Badge>}
+        {isDone && <Badge tone="success">Hoàn tất · {elapsedLabel ?? ELAPSED[mode]}</Badge>}
         <span className={styles.spacer} />
         {isDone && (
           <div className={styles.actions}>
@@ -54,7 +58,7 @@ export function ResultCard({ assistant }: { assistant: AssistantController }) {
 
       {isRunning && (
         <div className={styles.running}>
-          <RunSteps size="lg" steps={buildRunSteps(mode, 'tài liệu')} step={step} />
+          <ThinkingIndicator size="lg" note={THINKING_NOTE[mode]} />
         </div>
       )}
 

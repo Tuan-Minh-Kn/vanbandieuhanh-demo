@@ -11,6 +11,16 @@
   gap: 8px;
 }
 
+.sources {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-top: -6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .text {
   font-size: 13.5px;
   line-height: var(--lh-prose);

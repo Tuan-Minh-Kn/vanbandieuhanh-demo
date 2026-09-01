@@ -12,9 +12,9 @@ export const NOTIFICATION_COUNT = 9;
 
 export const KPIS: Kpi[] = [
   {
-    value: '4',
+    value: '3',
     label: 'Văn bản đến chưa xử lý',
-    trend: '+2 hôm nay',
+    trend: '+1 hôm nay',
     color: 'var(--c-blue)',
     trendColor: 'var(--c-blue-deep)',
   },
@@ -32,13 +32,6 @@ export const KPIS: Kpi[] = [
     color: 'var(--c-teal)',
     trendColor: 'var(--c-teal-ink)',
   },
-  {
-    value: '3',
-    label: 'Đã có tóm tắt AI sẵn',
-    trend: 'tiết kiệm ~40 phút',
-    color: 'var(--c-green)',
-    trendColor: 'var(--c-success-ink)',
-  },
 ];
 
 export const INBOX_FILTERS = ['Tất cả', 'Sắp đến hạn', 'Tôi là đầu mối'];
@@ -53,21 +46,21 @@ export const PERSONAL_STATS: PersonalStat[] = [
   { label: 'Chưa xử lý', value: '0', color: 'var(--c-danger)', note: 'Không có văn bản tồn', percent: 0 },
   {
     label: 'Đang xử lý',
-    value: '4',
+    value: '3',
     color: 'var(--c-warning)',
-    note: '3 văn bản có hạn trong tháng 9',
-    percent: 57,
+    note: '2 văn bản có hạn trong tháng 9',
+    percent: 50,
   },
   {
     label: 'Là đầu mối, chưa xử lý',
-    value: '3',
+    value: '2',
     color: 'var(--c-blue)',
     note: 'Đ/c là đầu mối tổng hợp',
-    percent: 43,
+    percent: 33,
   },
 ];
 
-export const PERSONAL_STATS_PERIOD = 'Tháng 08/2026 · 7 văn bản';
+export const PERSONAL_STATS_PERIOD = 'Tháng 08/2026 · 6 văn bản';
 
 export const FOOTER_COLUMNS: FooterColumn[] = [
   {

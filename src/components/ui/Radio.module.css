@@ -1,0 +1,38 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+.dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-default);
+  background: var(--surface-card);
+  transition: all var(--dur-fast) ease;
+}
+
+.wrap:hover .dot {
+  border-color: var(--c-blue);
+}
+
+.inner {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background var(--dur-fast) ease;
+}
+
+.checked {
+  border-color: var(--c-blue);
+  border-width: 2px;
+}
+
+.checked .inner {
+  background: var(--c-blue);
+}
