@@ -61,6 +61,16 @@ export function AssistantModal({
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [open, onClose]);
 
+  /**
+   * Chỉ đạo đổi thì kết quả cũ không còn đúng nữa: kết quả tham mưu phụ thuộc chỉ đạo,
+   * giữ lại sẽ thành nội dung của chỉ đạo trước mà nhãn lại là chỉ đạo mới. Về idle để
+   * người dùng bấm chạy lại. Chỉ reset khi đang có gì đó, tránh gọi mỗi lần gõ một chữ.
+   */
+  const changeDirective = (value: string) => {
+    if (!isIdle) assistant.reset();
+    setDirective(value);
+  };
+
   const busy = isRunning || isStreaming;
   const nothingSelected = selectedFile === null;
 
@@ -119,7 +129,7 @@ export function AssistantModal({
           {advice && (
             <DirectiveInput
               value={directive}
-              onChange={setDirective}
+              onChange={changeDirective}
               presets={DIRECTIVE_PRESETS}
               placeholder="Dán bút phê hoặc chỉ đạo. Ví dụ: Nghiên cứu, đề xuất nội dung tham gia ý kiến; báo cáo trước 08/09."
             />
@@ -147,7 +157,7 @@ export function AssistantModal({
             />
           )}
 
-          {advice && isDone && <AdviceGroups groups={getAdviceGroups(doc.code)} />}
+          {advice && isDone && <AdviceGroups groups={getAdviceGroups(doc.code, directive)} />}
         </div>
 
         {isDone && (

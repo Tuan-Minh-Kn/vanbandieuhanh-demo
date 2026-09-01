@@ -6,20 +6,12 @@ export const MODEL_NOTE = 'Qwen3-4B · xử lý cục bộ trong mạng KTNN';
 
 export const PRIVACY_NOTE = 'Xử lý cục bộ — không gửi dữ liệu ra ngoài';
 
-/** Gợi ý bút phê nhanh cho ô "Chỉ đạo của lãnh đạo". */
-export const DIRECTIVE_PRESETS = [
-  'Rà soát rủi ro kiểm toán',
-  'Đề xuất nội dung tham gia ý kiến',
-  'So sánh với văn bản cũ',
-  'Báo cáo trước hạn',
-];
-
-export const DIRECTIVE_PRESETS_STANDALONE = [
-  'Rà soát rủi ro kiểm toán',
-  'Đề xuất nội dung kiểm toán trọng yếu',
-  'So sánh với văn bản cũ',
-  'Báo cáo trước 30/9',
-];
+/**
+ * Gợi ý bút phê nhanh cho ô "Chỉ đạo của lãnh đạo". Giữ ở mức chung chung, dùng
+ * được cho mọi loại văn bản đến (nghị định, thông tư, tờ trình, công văn…) —
+ * không gắn với nghiệp vụ kiểm toán.
+ */
+export const DIRECTIVE_PRESETS = ['Rà soát việc phải làm và thời hạn', 'Đánh giá tác động tới đơn vị'];
 
 export const LENGTH_OPTIONS = {
   summary: ['4 câu', '6 câu', 'Theo chương'],

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { DIRECTIVE_PRESETS_STANDALONE, LENGTH_OPTIONS } from '../../data/assistant';
+import { DIRECTIVE_PRESETS, LENGTH_OPTIONS } from '../../data/assistant';
 import { STANDALONE_FILES_ADVICE, STANDALONE_FILES_SUMMARY } from '../../data/standaloneSession';
 import type { AssistantController } from '../../lib/useAssistant';
 import { Button } from '../ui/Button';
@@ -69,8 +69,8 @@ export function InputSourceCard({ assistant }: { assistant: AssistantController 
             size="lg"
             value={directive}
             onChange={setDirective}
-            presets={DIRECTIVE_PRESETS_STANDALONE}
-            placeholder="Ví dụ: Nghiên cứu, đề xuất phương án kiểm toán việc quản lý tài sản công tại các đơn vị sự nghiệp; báo cáo trước 30/9."
+            presets={DIRECTIVE_PRESETS}
+            placeholder="Dán bút phê hoặc chỉ đạo. Ví dụ: Nghiên cứu, đề xuất nội dung tham gia ý kiến; báo cáo trước 30/9."
           />
         </div>
       )}
