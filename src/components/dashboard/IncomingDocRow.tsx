@@ -76,7 +76,7 @@ export function IncomingDocRow({
           </div>
         </div>
 
-        <div>
+        <div className={styles.dueCell}>
           <span className={[styles.due, DUE_TONE[doc.level]].join(' ')}>{doc.due}</span>
           <div className={styles.dueNote}>{doc.dueNote}</div>
         </div>

@@ -18,6 +18,8 @@ import styles from './InboxPage.module.css';
 export function InboxPage() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [assistantOpen, setAssistantOpen] = useState(false);
+  /** Drawer điều hướng ở khổ hẹp. */
+  const [navOpen, setNavOpen] = useState(false);
   /** Tên tệp sẽ đưa vào lần chạy hiện tại — mỗi lần chỉ xử lý một tệp. */
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   /** Tệp đang xem trước; null là không mở. */
@@ -62,10 +64,10 @@ export function InboxPage() {
 
   return (
     <div className={styles.page}>
-      <AppHeader />
+      <AppHeader onOpenNav={() => setNavOpen(true)} />
 
       <div className={styles.body}>
-        <Sidebar />
+        <Sidebar open={navOpen} onClose={() => setNavOpen(false)} />
 
         <main className={styles.main}>
           <div className={styles.toolbar}>

@@ -9,6 +9,66 @@
   gap: 2px;
 }
 
+/* Nút đóng drawer — chỉ có nghĩa khi thanh điều hướng đang là lớp phủ. */
+.closeRow {
+  display: none;
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 11px;
+  margin-bottom: 6px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--n-50);
+  font-size: 12.5px;
+  font-weight: var(--fw-semibold);
+  color: var(--text-secondary);
+}
+
+.overlay {
+  display: none;
+}
+
+/* Dưới 1024px màn hình không đủ chỗ cho cột 236px cố định: chuyển sang drawer
+   phủ lên nội dung, mở bằng nút trên thanh tiêu đề. */
+@media (max-width: 1023px) {
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    background: rgba(1, 1, 53, 0.45);
+    backdrop-filter: blur(2px);
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 31;
+    width: min(300px, 86vw);
+    overflow-y: auto;
+    border-right: none;
+    box-shadow: var(--shadow-lg);
+    transform: translateX(-100%);
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+
+  .closeRow {
+    display: block;
+  }
+}
+
 .group {
   border-radius: 12px;
   overflow: hidden;

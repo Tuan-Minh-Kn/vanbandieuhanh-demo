@@ -52,3 +52,9 @@
   font-weight: var(--fw-semibold);
   white-space: nowrap;
 }
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

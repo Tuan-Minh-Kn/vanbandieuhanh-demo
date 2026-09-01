@@ -10,6 +10,23 @@
   color: var(--text-inverse);
 }
 
+/* Nút mở drawer: chỉ hiện khi thanh điều hướng không còn nằm cố định bên trái. */
+.menu {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--text-inverse);
+}
+
+.menu:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
 .searchWrap {
   flex: 1 1 260px;
   min-width: 200px;
@@ -145,4 +162,41 @@
 .userUnit {
   font-size: 10px;
   color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── Khổ hẹp: đặt cuối file để chắc chắn ghi đè được rule gốc ── */
+
+@media (max-width: 1023px) {
+  .menu {
+    display: flex;
+  }
+}
+
+/* Ô tìm kiếm xuống hàng riêng, chiếm hết chiều ngang. */
+@media (max-width: 899px) {
+  .header {
+    padding: 8px 12px;
+    gap: 8px 10px;
+  }
+
+  .searchWrap {
+    order: 10;
+    flex: 1 0 100%;
+  }
+
+  .clock {
+    display: none;
+  }
+}
+
+/* Khổ điện thoại: chỉ giữ nhận diện, thông báo, avatar. */
+@media (max-width: 560px) {
+  .kbd,
+  .userText {
+    display: none;
+  }
+
+  .user {
+    padding: 4px;
+  }
 }

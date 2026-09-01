@@ -82,3 +82,10 @@
   line-height: 1.55;
   color: var(--text-secondary);
 }
+
+/* Xếp dọc rồi thì sticky chỉ làm cột trái dính lại giữa trang. */
+@media (max-width: 900px) {
+  .column {
+    position: static;
+  }
+}

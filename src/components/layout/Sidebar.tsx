@@ -1,23 +1,40 @@
 import { useState } from 'react';
 import { NAV_FOOT_ITEMS, NAV_ITEMS } from '../../data/navigation';
-import { ChevronDownIcon, DownloadIcon, FileIcon, FolderIcon, PathIcon } from '../ui/Icon';
+import { ChevronDownIcon, CloseIcon, DownloadIcon, FileIcon, FolderIcon, PathIcon } from '../ui/Icon';
 import { IconButton } from '../ui/IconButton';
 import styles from './Sidebar.module.css';
 
+export interface SidebarProps {
+  /** Chỉ có tác dụng ở khổ hẹp, nơi thanh điều hướng là drawer phủ lên nội dung. */
+  open?: boolean;
+  onClose?: () => void;
+}
+
 /** Thanh điều hướng bên trái: nhóm phân hệ văn bản + ba mục tiện ích gập/mở. */
-export function Sidebar() {
+export function Sidebar({ open = false, onClose }: SidebarProps) {
   const [groupOpen, setGroupOpen] = useState(true);
   const [activeNav, setActiveNav] = useState(0);
   const [openFoot, setOpenFoot] = useState(-1);
 
   return (
-    <nav className={styles.sidebar} aria-label="Điều hướng phân hệ">
+    <>
+      {open && <div className={styles.overlay} onClick={onClose} aria-hidden />}
+      <nav
+        className={[styles.sidebar, open ? styles.sidebarOpen : ''].join(' ')}
+        aria-label="Điều hướng phân hệ"
+      >
+        <div className={styles.closeRow}>
+          <button type="button" className={styles.close} onClick={onClose}>
+            <CloseIcon size={14} />
+            Đóng menu
+          </button>
+        </div>
       <div className={styles.group}>
         <button
           type="button"
           className={styles.groupHeader}
           aria-expanded={groupOpen}
-          onClick={() => setGroupOpen((open) => !open)}
+          onClick={() => setGroupOpen((current) => !current)}
         >
           <FolderIcon size={15} strokeWidth={1.9} />
           <span className={styles.groupLabel}>Quản lý văn bản, điều hành</span>
@@ -94,7 +111,8 @@ export function Sidebar() {
             </div>
           );
         })}
-      </div>
-    </nav>
+        </div>
+      </nav>
+    </>
   );
 }

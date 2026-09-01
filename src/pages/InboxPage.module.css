@@ -49,8 +49,23 @@
   padding: 16px 20px 26px;
 }
 
-@media (max-width: 1024px) {
-  .body {
-    flex-direction: column;
+@media (max-width: 899px) {
+  .toolbar {
+    padding: 11px 14px 10px;
+  }
+
+  .pageTitle {
+    font-size: 15.5px;
+  }
+
+  .stack {
+    gap: 12px;
+    padding: 12px 14px 22px;
+  }
+}
+
+@media (max-width: 560px) {
+  .stack {
+    padding: 10px 10px 20px;
   }
 }

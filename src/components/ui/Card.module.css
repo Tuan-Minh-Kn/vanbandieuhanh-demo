@@ -29,3 +29,16 @@
 .spacer {
   flex: 1;
 }
+
+@media (max-width: 899px) {
+  .header {
+    flex-wrap: wrap;
+    padding: 11px 12px;
+  }
+
+  /* Nhóm lọc và "Xem tất cả" xuống hàng riêng thay vì bóp tiêu đề. */
+  .spacer {
+    flex-basis: 100%;
+    height: 0;
+  }
+}

@@ -147,3 +147,54 @@
   display: flex;
   gap: 5px;
 }
+
+@media (max-width: 899px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    padding: 13px 14px;
+  }
+
+  /* Không còn tiêu đề cột nên tự nhắc nhãn ngay trong ô. */
+  .arrived::before {
+    content: 'Đến ';
+    color: var(--text-muted);
+  }
+
+  .subject {
+    padding-right: 0;
+  }
+
+  .dueCell {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .dueNote {
+    margin-top: 0;
+  }
+
+  /* Ý kiến + thao tác: về lề trái, nút xuống hàng dưới ghi chú. */
+  .actions {
+    align-items: stretch;
+  }
+
+  .note {
+    text-align: left;
+  }
+
+  .actionRow {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .row {
+    padding: 12px 10px;
+  }
+
+  .title {
+    font-size: 12.5px;
+  }
+}

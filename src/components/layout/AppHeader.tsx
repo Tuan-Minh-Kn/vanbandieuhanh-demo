@@ -1,12 +1,20 @@
 import { CURRENT_USER, NOTIFICATION_COUNT, SESSION_CLOCK } from '../../data/dashboard';
-import { BellIcon, ClockIcon, SearchIcon } from '../ui/Icon';
+import { BellIcon, ClockIcon, MenuIcon, SearchIcon } from '../ui/Icon';
 import { BrandBar } from './BrandBar';
 import styles from './AppHeader.module.css';
 
+export interface AppHeaderProps {
+  /** Mở thanh điều hướng dạng drawer; chỉ dùng ở khổ hẹp. */
+  onOpenNav?: () => void;
+}
+
 /** Thanh tiêu đề hệ thống: nhận diện KTNN, ô tìm kiếm, đồng hồ, thông báo, người dùng. */
-export function AppHeader() {
+export function AppHeader({ onOpenNav }: AppHeaderProps) {
   return (
     <header className={styles.header}>
+      <button type="button" className={styles.menu} onClick={onOpenNav} aria-label="Mở menu điều hướng">
+        <MenuIcon size={17} strokeWidth={2} />
+      </button>
       <BrandBar title="Hệ thống Quản lý Văn bản và Điều hành" />
 
       <div className={styles.searchWrap}>

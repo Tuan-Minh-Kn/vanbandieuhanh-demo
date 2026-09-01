@@ -75,6 +75,20 @@ giữ sẵn cho lúc chuyển sang đường dẫn thường.
 
 Xem lịch sử deploy: `npx wrangler pages deployment list --project-name vanbandieuhanh-demo`.
 
+## Khổ màn hình
+
+Bốn ngưỡng, dùng thống nhất trong các file `.module.css`:
+
+| Ngưỡng | Thay đổi chính |
+|---|---|
+| `≤ 1023px` | Thanh điều hướng rời khỏi bố cục, thành drawer phủ lên nội dung; hiện nút mở menu trên thanh tiêu đề |
+| `≤ 899px` | Bảng văn bản bỏ chia cột, mỗi văn bản thành một thẻ xếp dọc (ẩn hàng tiêu đề cột, tự nhắc nhãn "Đến …"); ô tìm kiếm xuống hàng riêng; ẩn đồng hồ |
+| `≤ 639px` | Hộp thoại trợ lý và cửa sổ xem trước PDF chiếm toàn màn hình; tab chế độ chiếm cả hàng |
+| `≤ 560px` | KPI và số liệu về một cột; ẩn tên người dùng và gợi ý `Ctrl K`; chân trang xếp dọc |
+
+Đã dò tràn ngang bằng DevTools Protocol ở 320 / 390 / 768 / 1023 / 1512px — không phần
+tử nào rộng hơn viewport.
+
 ## Văn bản thật & xem trước
 
 Ba văn bản trong hộp việc dùng **số ký hiệu, cơ quan ban hành, ngày ban hành thật**, đọc

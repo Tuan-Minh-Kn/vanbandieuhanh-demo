@@ -58,3 +58,25 @@
   color: var(--text-muted);
   line-height: 1.4;
 }
+
+@media (max-width: 639px) {
+  .header {
+    flex-wrap: wrap;
+    padding: 12px 12px 10px;
+  }
+
+  .section {
+    padding: 0 12px 12px;
+  }
+
+  .footer {
+    padding: 10px 12px;
+  }
+
+  /* Nút chạy chiếm cả hàng, gợi ý xuống dưới. */
+  .runRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+}

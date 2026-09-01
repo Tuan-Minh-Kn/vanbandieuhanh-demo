@@ -118,6 +118,36 @@
   flex: none;
 }
 
+@media (max-width: 639px) {
+  .panel {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    max-height: none;
+    border: none;
+    border-radius: 0;
+    transform: none;
+    animation: none;
+  }
+
+  .header {
+    flex-wrap: wrap;
+    padding: 10px 12px;
+  }
+
+  /* Tên tệp một hàng, ba nút hàng dưới — nút tải xuống không bị đẩy ra ngoài. */
+  .text {
+    flex: 1 1 100%;
+    order: -1;
+  }
+
+  .actions {
+    flex: 1 1 100%;
+    justify-content: flex-end;
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

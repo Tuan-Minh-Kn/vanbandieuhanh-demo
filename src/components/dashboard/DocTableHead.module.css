@@ -23,3 +23,11 @@
 .right {
   text-align: right;
 }
+
+/* Ô xếp dọc thì tiêu đề cột không còn thẳng hàng với dữ liệu — ẩn đi,
+   thông tin được nhắc lại ngay trong từng ô (xem IncomingDocRow). */
+@media (max-width: 899px) {
+  .head {
+    display: none;
+  }
+}

@@ -104,3 +104,29 @@
   font-size: 12px;
   font-weight: var(--fw-tight);
 }
+
+@media (max-width: 899px) {
+  .footer {
+    padding: 16px 14px 20px;
+  }
+
+  .inner {
+    gap: 16px;
+  }
+
+  .crest {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (max-width: 560px) {
+  .inner {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .identity {
+    min-width: 0;
+  }
+}

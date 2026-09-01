@@ -97,4 +97,12 @@
   .grid {
     grid-template-columns: 1fr;
   }
+
+  .header {
+    flex-wrap: wrap;
+  }
+
+  .card {
+    padding: 12px 12px 14px;
+  }
 }

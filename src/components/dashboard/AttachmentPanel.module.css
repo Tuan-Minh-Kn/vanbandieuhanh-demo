@@ -65,3 +65,28 @@
     padding-left: 14px;
   }
 }
+
+@media (max-width: 899px) {
+  .header {
+    flex-wrap: wrap;
+  }
+
+  /* Tên tệp chiếm cả hàng, ba nút xuống hàng dưới — không nút nào bị bóp. */
+  .row {
+    flex-wrap: wrap;
+  }
+
+  .text {
+    flex: 1 1 60%;
+  }
+}
+
+@media (max-width: 560px) {
+  .wrap {
+    padding: 0 10px 12px;
+  }
+
+  .row {
+    gap: 8px;
+  }
+}

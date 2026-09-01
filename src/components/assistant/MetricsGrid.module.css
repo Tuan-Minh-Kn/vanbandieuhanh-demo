@@ -24,3 +24,21 @@
   margin-top: 3px;
   letter-spacing: var(--ls-snug);
 }
+
+/* Giá trị kiểu "12.480 → 214 từ" cần cả hàng, chia 3 cột là gãy chữ. */
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cell {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .value {
+    margin-top: 0;
+  }
+}

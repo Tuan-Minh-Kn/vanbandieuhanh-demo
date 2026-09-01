@@ -91,5 +91,33 @@
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: minmax(0, 1fr);
+    padding: 14px 14px 32px;
+  }
+}
+
+@media (max-width: 639px) {
+  .header {
+    gap: 10px 12px;
+    padding: 9px 12px;
+  }
+
+  /* Hai chip trạng thái xuống hàng riêng thay vì bóp tên phân hệ. */
+  .chip,
+  .modelChip {
+    order: 10;
+  }
+
+  .toolbar {
+    padding: 10px 12px;
+  }
+
+  .session,
+  .divider {
+    display: none;
+  }
+
+  .grid {
+    padding: 12px 10px 28px;
+    gap: 12px;
   }
 }

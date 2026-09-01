@@ -62,3 +62,27 @@
   background: var(--n-50);
   border-radius: 0 0 16px 16px;
 }
+
+@media (max-width: 639px) {
+  .card {
+    min-height: 340px;
+  }
+
+  .header {
+    flex-wrap: wrap;
+    padding: 12px;
+  }
+
+  .actions {
+    flex: 1 1 100%;
+  }
+
+  .output {
+    padding: 12px 12px 14px;
+  }
+
+  .running,
+  .footer {
+    padding: 12px;
+  }
+}

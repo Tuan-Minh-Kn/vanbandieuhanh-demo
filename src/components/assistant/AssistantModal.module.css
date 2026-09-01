@@ -134,3 +134,44 @@
   display: flex;
   gap: 8px;
 }
+
+/* Hộp thoại nổi 620px không còn nghĩa gì dưới 640px: cho chiếm cả màn hình,
+   bỏ bo góc, và đổi hiệu ứng vào từ dưới lên (quen tay trên điện thoại). */
+@media (max-width: 639px) {
+  .panel {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    max-height: 100vh;
+    height: 100dvh;
+    border: none;
+    border-radius: 0;
+    transform: none;
+  }
+
+  .panelHidden {
+    transform: translateY(2%);
+  }
+
+  .header {
+    padding: 11px 12px;
+  }
+
+  .tabs {
+    padding: 10px 12px 0;
+  }
+
+  .body {
+    padding: 12px;
+    gap: 11px;
+  }
+
+  .footer {
+    padding: 10px 12px;
+  }
+
+  /* Sao chép / Xuất DOCX xếp dọc cho đủ chỗ chữ. */
+  .footerRow {
+    flex-direction: column;
+  }
+}

@@ -57,3 +57,29 @@
 .viewAll:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 899px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    padding: 13px 14px;
+  }
+
+  .title {
+    padding-right: 0;
+  }
+
+  .actions {
+    align-items: flex-start;
+  }
+
+  .to {
+    text-align: left;
+  }
+}
+
+@media (max-width: 560px) {
+  .row {
+    padding: 12px 10px;
+  }
+}

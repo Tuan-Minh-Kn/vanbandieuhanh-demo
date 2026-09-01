@@ -150,6 +150,12 @@ export const PlusIcon = (p: IconProps) => (
   </svg>
 );
 
+export const MenuIcon = (p: IconProps) => (
+  <svg {...strokeProps(p)}>
+    <path d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+);
+
 export const ChevronDownIcon = (p: IconProps) => (
   <svg {...strokeProps(p)}>
     <path d="m6 9 6 6 6-6" />
